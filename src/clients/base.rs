@@ -259,7 +259,7 @@ where
     /// [Reference](https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-tracks)
     async fn tracks<'a>(
         &self,
-        track_ids: impl IntoIterator<Item = &'a TrackId> + Send + 'a,
+        track_ids: impl IntoIterator<Item = &'a TrackId>+ 'a,
         market: Option<&Market>,
     ) -> ClientResult<Vec<FullTrack>> {
         let ids = join_ids(track_ids);
