@@ -28,7 +28,7 @@ pub struct ClientCredsSpotify {
 }
 
 /// This client has access to the base methods.
-#[maybe_async]
+#[maybe_async(?Send)]
 impl BaseClient for ClientCredsSpotify {
     fn get_http(&self) -> &HttpClient {
         &self.http
@@ -92,7 +92,7 @@ impl ClientCredsSpotify {
     ///
     /// * The read token is expired
     /// * The cached token is disabled in the config
-    #[maybe_async]
+    #[maybe_async(?Send)]
     pub async fn read_token_cache(&self) -> ClientResult<Option<Token>> {
         if !self.get_config().token_cached {
             log::info!("Token cache read ignored (not configured)");
@@ -110,7 +110,7 @@ impl ClientCredsSpotify {
     }
 
     /// Fetch access token
-    #[maybe_async]
+    #[maybe_async(?Send)]
     async fn fetch_token(&self) -> ClientResult<Token> {
         let mut data = Form::new();
 
@@ -126,7 +126,7 @@ impl ClientCredsSpotify {
 
     /// Obtains the client access token for the app. The resulting token will be
     /// saved internally.
-    #[maybe_async]
+    #[maybe_async(?Send)]
     pub async fn request_token(&mut self) -> ClientResult<()> {
         log::info!("Requesting Client Credentials token");
 

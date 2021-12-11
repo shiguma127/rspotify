@@ -27,7 +27,7 @@ use url::Url;
 /// [`user_playlist`](crate::clients::BaseClient::user_playlist). This trait
 /// only separates endpoints that *always* need authorization from the base
 /// ones.
-#[maybe_async]
+#[maybe_async(?Send)]
 pub trait OAuthClient: BaseClient {
     fn get_oauth(&self) -> &OAuth;
 
@@ -143,7 +143,7 @@ pub trait OAuthClient: BaseClient {
     ///
     /// [`Config::token_cached`]: crate::Config::token_cached
     #[cfg(feature = "cli")]
-    #[maybe_async]
+    #[maybe_async(?Send)]
     async fn prompt_for_token(&mut self, url: &str) -> ClientResult<()> {
         match self.read_token_cache(true).await {
             Ok(Some(new_token)) => {
