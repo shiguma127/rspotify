@@ -27,7 +27,7 @@ use url::Url;
 /// [`user_playlist`](crate::clients::BaseClient::user_playlist). This trait
 /// only separates endpoints that *always* need authorization from the base
 /// ones.
-#[maybe_async]
+#[maybe_async(?Send)]
 pub trait OAuthClient: BaseClient {
     fn get_oauth(&self) -> &OAuth;
 

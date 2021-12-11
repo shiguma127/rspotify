@@ -21,10 +21,10 @@ use serde_json::Value;
 /// This trait implements the basic endpoints from the Spotify API that may be
 /// accessed without user authorization, including parts of the authentication
 /// flow that are shared, and the endpoints.
-#[maybe_async]
+#[maybe_async(?Send)]
 pub trait BaseClient
 where
-    Self: Send + Sync + Default + Clone + fmt::Debug,
+    Self: Sync + Default + Clone + fmt::Debug,
 {
     fn get_config(&self) -> &Config;
     fn get_http(&self) -> &HttpClient;

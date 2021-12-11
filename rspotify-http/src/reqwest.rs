@@ -97,10 +97,9 @@ impl ReqwestClient {
     }
 }
 
-#[async_impl]
+#[async_impl(?Send)]
 impl BaseHttpClient for ReqwestClient {
     type Error = ReqwestError;
-
     #[inline]
     async fn get(
         &self,

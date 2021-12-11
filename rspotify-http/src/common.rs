@@ -18,8 +18,8 @@ pub type Form<'a> = HashMap<&'a str, &'a str>;
 /// different ways (`Value::Null`, an empty `Value::Object`...), so this removes
 /// redundancy and edge cases (a `Some(Value::Null), for example, doesn't make
 /// much sense).
-#[maybe_async]
-pub trait BaseHttpClient: Send + Default + Clone + fmt::Debug {
+#[maybe_async(?Send)]
+pub trait BaseHttpClient: Default + Clone + fmt::Debug {
     type Error;
 
     // This internal function should always be given an object value in JSON.

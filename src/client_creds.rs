@@ -28,7 +28,7 @@ pub struct ClientCredsSpotify {
 }
 
 /// This client has access to the base methods.
-#[maybe_async]
+#[maybe_async(?Send)]
 impl BaseClient for ClientCredsSpotify {
     fn get_http(&self) -> &HttpClient {
         &self.http
